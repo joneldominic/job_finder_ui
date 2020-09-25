@@ -8,13 +8,37 @@ import '../widgets/search_icon.dart';
 import '../widgets/box_icon.dart';
 
 class HomePage extends StatelessWidget {
-  final List<Map<String, dynamic>> _listViewData = [
+  final List<Map<String, dynamic>> _listForYouData = [
     {
       "icon-path": assetPath.SPOTIFY_ICON_PATH,
       "type": "Full Time",
       "position": "UI/UX Designer",
       "salary": "\$450/hr",
       "is-active": true,
+    },
+    {
+      "icon-path": assetPath.GOOGLE_ICON_PATH,
+      "type": "Full Time",
+      "position": "Senior Develop",
+      "salary": "\$500/hr",
+      "is-active": false,
+    },
+  ];
+
+  final List<Map<String, dynamic>> _listRecentlyAddedData = [
+    {
+      "icon-path": assetPath.SPOTIFY_ICON_PATH,
+      "type": "Full Time",
+      "position": "UI/UX Designer",
+      "salary": "\$450/hr",
+      "is-active": true,
+    },
+    {
+      "icon-path": assetPath.GOOGLE_ICON_PATH,
+      "type": "Full Time",
+      "position": "Senior Develop",
+      "salary": "\$500/hr",
+      "is-active": false,
     },
     {
       "icon-path": assetPath.GOOGLE_ICON_PATH,
@@ -49,13 +73,17 @@ class HomePage extends StatelessWidget {
       ),
       prefixIcon: BoxIcon(),
       suffixIcon: SearchIcon(),
+      backgroundColor: ColorUtil.backgroundColor,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTags(),
             SizedBox(height: 10),
             _buildForYouSection(),
+            SizedBox(height: 10),
+            _buildRecentlyAddedSection(),
           ],
         ),
       ),
@@ -124,23 +152,25 @@ class HomePage extends StatelessWidget {
           Container(
             height: 200,
             child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return _buildCard(_listViewData[index]);
-                },
-                separatorBuilder: (content, index) => SizedBox(
-                      width: 20,
-                    ),
-                itemCount: _listViewData.length),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return _buildForYouCard(_listForYouData[index]);
+              },
+              separatorBuilder: (content, index) => SizedBox(
+                width: 15,
+              ),
+              itemCount: _listForYouData.length,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildCard(Map<String, dynamic> data) {
+  Widget _buildForYouCard(Map<String, dynamic> data) {
     return Container(
-      width: 200,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      width: 210,
       decoration: BoxDecoration(
         color: data["is-active"] ? ColorUtil.primaryColor : Colors.white,
         borderRadius: BorderRadius.all(
@@ -148,17 +178,138 @@ class HomePage extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                
-                child: Image.asset(
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
                   data["icon-path"],
+                  height: 40,
+                  width: 40,
                 ),
-              ),
-            ],
+                Text(
+                  data["type"],
+                  style: TextStyle(
+                    color: data["is-active"] ? Colors.white : Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
           ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data["position"],
+                  style: TextStyle(
+                    color: data["is-active"] ? Colors.white : Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  data["salary"],
+                  style: TextStyle(
+                    color: data["is-active"] ? Colors.white : Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecentlyAddedSection() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Recently Added",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 200,
+            child: ListView.separated(
+              itemBuilder: (context, index) {
+                return _buildRecentlyAddedCard(_listRecentlyAddedData[index]);
+              },
+              separatorBuilder: (content, index) => SizedBox(
+                height: 10,
+              ),
+              itemCount: _listRecentlyAddedData.length,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecentlyAddedCard(Map<String, dynamic> data) {
+    return Container(
+      height: 75,
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.only(right: 15),
+            child: Image.asset(
+              assetPath.GOOGLE_ICON_PATH,
+              height: 40,
+              width: 40,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Server Technician",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "Google",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: ColorUtil.tertiaryColor),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            "\$500/hr",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          )
         ],
       ),
     );
