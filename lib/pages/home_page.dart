@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/utils/route_list.dart' as routes;
 import '../core/utils/asset_path_list.dart' as assetPath;
 import '../core/utils/color_util.dart';
 
@@ -77,6 +78,9 @@ class HomePage extends StatelessWidget {
       ),
       prefixIcon: BoxIcon(),
       suffixIcon: SearchIcon(),
+      onTapSuffix: () => Navigator.of(context).pushNamed(
+        routes.SEARCH_ROUTE,
+      ),
       backgroundColor: ColorUtil.backgroundColor,
       child: Expanded(
         child: Container(
