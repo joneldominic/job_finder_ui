@@ -23,29 +23,33 @@ class HomePage extends StatelessWidget {
       "salary": "\$500/hr",
       "is-active": false,
     },
+    {
+      "icon-path": assetPath.IBM_ICON_PATH,
+      "type": "Part Time",
+      "position": "Visual Designer",
+      "salary": "\$450/hr",
+      "is-active": false,
+    },
   ];
 
   final List<Map<String, dynamic>> _listRecentlyAddedData = [
     {
-      "icon-path": assetPath.SPOTIFY_ICON_PATH,
-      "type": "Full Time",
-      "position": "UI/UX Designer",
+      "icon-path": assetPath.IBM_ICON_PATH,
+      "company": "IBM",
+      "position": "Visual Designer",
       "salary": "\$450/hr",
-      "is-active": true,
     },
     {
       "icon-path": assetPath.GOOGLE_ICON_PATH,
-      "type": "Full Time",
-      "position": "Senior Develop",
+      "company": "Google",
+      "position": "Server Technician",
       "salary": "\$500/hr",
-      "is-active": false,
     },
     {
-      "icon-path": assetPath.GOOGLE_ICON_PATH,
-      "type": "Full Time",
-      "position": "Senior Develop",
-      "salary": "\$500/hr",
-      "is-active": false,
+      "icon-path": assetPath.FACEBOOK_ICON_PATH,
+      "company": "Facebook",
+      "position": "Ajax Develop",
+      "salary": "\$250/hr",
     },
   ];
 
@@ -74,17 +78,20 @@ class HomePage extends StatelessWidget {
       prefixIcon: BoxIcon(),
       suffixIcon: SearchIcon(),
       backgroundColor: ColorUtil.backgroundColor,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTags(),
-            SizedBox(height: 10),
-            _buildForYouSection(),
-            SizedBox(height: 10),
-            _buildRecentlyAddedSection(),
-          ],
+      child: Expanded(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTags(),
+              SizedBox(height: 10),
+              _buildForYouSection(),
+              SizedBox(height: 10),
+              _buildRecentlyAddedSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -150,7 +157,7 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Container(
-            height: 200,
+            height: 190,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
@@ -231,31 +238,38 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildRecentlyAddedSection() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Recently Added",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 200,
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return _buildRecentlyAddedCard(_listRecentlyAddedData[index]);
-              },
-              separatorBuilder: (content, index) => SizedBox(
-                height: 10,
+    return Expanded(
+      child: Container(
+        constraints: BoxConstraints.expand(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Recently Added",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              itemCount: _listRecentlyAddedData.length,
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(top: 5, bottom: 10),
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return _buildRecentlyAddedCard(
+                        _listRecentlyAddedData[index]);
+                  },
+                  separatorBuilder: (content, index) => SizedBox(
+                    height: 10,
+                  ),
+                  itemCount: _listRecentlyAddedData.length,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -275,7 +289,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(right: 15),
             child: Image.asset(
-              assetPath.GOOGLE_ICON_PATH,
+              data["icon-path"],
               height: 40,
               width: 40,
             ),
@@ -286,7 +300,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Server Technician",
+                  data["position"],
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -294,7 +308,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Google",
+                  data["company"],
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -304,7 +318,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Text(
-            "\$500/hr",
+            data["salary"],
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
