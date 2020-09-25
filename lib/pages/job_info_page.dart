@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/utils/route_list.dart' as routes;
 import '../core/utils/color_util.dart';
 import '../core/utils/asset_path_list.dart' as assetPath;
 
@@ -166,7 +167,9 @@ class JobInfoPage extends StatelessWidget {
                 width: double.infinity,
                 child: FlatButton(
                   color: ColorUtil.primaryColor,
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).pushNamed(
+                  routes.APPLICATIONS_ROUTE,
+                ),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
                       color: ColorUtil.primaryColor,

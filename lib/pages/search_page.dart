@@ -41,7 +41,7 @@ class SearchPage extends StatelessWidget {
     {
       "icon-path": assetPath.GOOGLE_ICON_PATH,
       "company": "Google Philippines",
-      "position": "Flutter Engineer ",
+      "position": "Flutter Engineer",
       "salary": "\$1000/hr",
       "date": "24.03.2020"
     },
