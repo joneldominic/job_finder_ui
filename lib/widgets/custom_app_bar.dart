@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: onTapSuffix,
-                    child: suffixIcon,
+                    child: suffixIcon ?? Container(),
                   ),
                 ],
               ),
