@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
     @required this.prefixIcon,
     this.backgroundColor,
     this.iconColor,
-    @required this.suffixIcon,
+    this.suffixIcon,
     @required this.child,
   }) : super(key: key);
   @override
