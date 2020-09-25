@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/utils/route_list.dart' as routes;
 import '../core/utils/color_util.dart';
 import '../core/utils/asset_path_list.dart' as assetPath;
 
@@ -67,7 +68,7 @@ class SearchPage extends StatelessWidget {
       child: Expanded(
         child: Container(
           constraints: BoxConstraints.expand(),
-          margin: EdgeInsets.symmetric(horizontal: 10),
+          margin: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -75,7 +76,7 @@ class SearchPage extends StatelessWidget {
               SizedBox(height: 10),
               _buildCategorySection(),
               SizedBox(height: 10),
-              _buildJobListView(),
+              _buildJobListView(context),
             ],
           ),
         ),
@@ -158,7 +159,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildJobListView() {
+  Widget _buildJobListView(BuildContext context) {
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10),
@@ -168,7 +169,7 @@ class SearchPage extends StatelessWidget {
             height: 15,
           ),
           itemBuilder: (context, index) {
-            return _buildJobCard(_listJobData[index]);
+            return _buildJobCard(_listJobData[index], context);
           },
           itemCount: _listJobData.length,
         ),
@@ -176,7 +177,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildJobCard(data) {
+  Widget _buildJobCard(data, BuildContext context) {
     return Container(
       height: 150,
       padding: EdgeInsets.all(15),
@@ -223,9 +224,15 @@ class SearchPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(
-                Icons.more_vert,
-                color: ColorUtil.colorD9D9D9,
+              GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                  routes.JOB_INFO_ROUTE,
+                  arguments: data,
+                ),
+                child: Icon(
+                  Icons.more_vert,
+                  color: ColorUtil.colorD9D9D9,
+                ),
               )
             ],
           ),

@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
       child: Expanded(
         child: Container(
           constraints: BoxConstraints.expand(),
-          margin: EdgeInsets.symmetric(horizontal: 10),
+          margin: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

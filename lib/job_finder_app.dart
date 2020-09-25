@@ -16,6 +16,7 @@ class JobFinderApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       initialRoute: routes.HOME_ROUTE,
+      debugShowCheckedModeBanner: false,
       routes: {
         routes.HOME_ROUTE: (_) => HomePage(),
         routes.SEARCH_ROUTE: (_) => SearchPage(),

@@ -30,26 +30,30 @@ class CustomAppBar extends StatelessWidget {
       body: Container(
         color: backgroundColor,
         child: Container(
-          margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
+          margin: const EdgeInsets.only(top: 50),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: onTapPrefix,
-                    child: prefixIcon,
-                  ),
-                  GestureDetector(
-                    onTap: onTapSuffix,
-                    child: suffixIcon ?? Container(),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: onTapPrefix,
+                      child: prefixIcon,
+                    ),
+                    GestureDetector(
+                      onTap: onTapSuffix,
+                      child: suffixIcon ?? Container(),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 margin: const EdgeInsets.only(
-                  left: 10,
+                  left: 25,
+                  right: 25,
                   top: 25,
                   bottom: 20,
                 ),
