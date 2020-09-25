@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget {
   final Color iconColor;
   final Color backgroundColor;
   final Widget child;
+  final Alignment titleAlignment;
 
   const CustomAppBar.scaffold({
     Key key,
@@ -20,6 +21,7 @@ class CustomAppBar extends StatelessWidget {
     this.backgroundColor,
     this.iconColor,
     this.suffixIcon,
+    this.titleAlignment = Alignment.centerLeft,
     @required this.child,
   }) : super(key: key);
   @override
@@ -51,7 +53,7 @@ class CustomAppBar extends StatelessWidget {
                   top: 25,
                   bottom: 20,
                 ),
-                alignment: Alignment.centerLeft,
+                alignment: titleAlignment,
                 child: title,
               ),
               child ?? Container(),
